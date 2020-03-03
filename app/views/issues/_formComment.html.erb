@@ -1,0 +1,15 @@
+<div class="form-group margin-top margin-bot">
+    <%= form_for(@comment) do |f| %>
+        
+        <%= hidden_field_tag :user_id, @comment.user_id %>
+        <%= hidden_field_tag :issue_id, @comment.issue_id %>
+
+        <div class="field">
+            <%= f.label @user.username %>
+        </div>
+        <div class="field">
+            <%= f.text_field :text %>
+        </div>
+        <%= f.submit %>
+    <% end %>    
+</div>

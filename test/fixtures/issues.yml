@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  idUserCreator: 1
+  idUserAssignee: 1
+  title: MyString
+  description: MyString
+  type: 
+  priority: MyString
+  status: MyString
+  votes: 1
+  creationDate: 2019-11-07
+  updated: 2019-11-07
+
+two:
+  idUserCreator: 1
+  idUserAssignee: 1
+  title: MyString
+  description: MyString
+  type: 
+  priority: MyString
+  status: MyString
+  votes: 1
+  creationDate: 2019-11-07
+  updated: 2019-11-07

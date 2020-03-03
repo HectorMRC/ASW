@@ -1,0 +1,70 @@
+<style>
+  td.filter {
+    text-align: left;
+    vertical-align: bottom;
+    padding-top: 15px;
+    display: table-cell;
+  }
+  
+  td.usropt {
+    text-align: right;
+    vertical-align: top;
+  }
+  
+  td.action {
+    text-align: right;
+  }
+  
+  table.options {
+    width: 100% !important;
+    border-collapse: collapse;
+  }
+</style>
+
+<%= @x%>
+
+<div class="header">
+  
+  <div class="path">
+    <label class="soft">fib_asw / issue_tracker_project</label>
+  </div>
+  
+  <div class="title">
+    <label class="light">Issues</label>
+  </div>
+  
+  <table class="options">
+    <tr>
+      <td class="filter">
+        <label class="filter">Filter by: </label>
+        <Button class=<%  if @filter == "all" %>"selected"<% else %>"option"<% end %>>
+          <%= link_to('All', :value => @value, :filter => "all", :sort => @sortby, :order => @order) %>
+        </Button>
+        <Button class=<%  if @filter == "open" %>"selected"<% else %>"option"<% end %>>
+          <%= link_to('Open', :value => @value, :filter => "open", :sort => @sortby, :order => @order) %>
+        </Button>
+        
+        <%if @uid != 0 %>
+          <Button class=<%  if @filter == "watching" %>"selected"<% else %>"option"<% end %>>
+            <%= link_to('Watching', :value => @value, :filter => "watching", :sort => @sortby, :order => @order) %>
+          </Button>
+          <Button class=<%  if @filter == "mine" %>"selected"<% else %>"option"<% end %>>
+            <%= link_to('Mine', :value => @value, :filter => "mine", :sort => @sortby, :order => @order) %>
+          </Button>
+        <% end %>
+        
+      </td>
+      
+      <td class="usropt">
+        <% if @uid != 0 %>
+          <Button class="usroption">
+            <%= link_to "Edit user", edit_user_registration_path %>
+          </Button>
+        <% end %>
+      </td>
+      
+    </tr>
+  </table>
+  
+  <br>
+</div>

@@ -1,0 +1,54 @@
+<%= form_with(model: issue, local: true) do |form| %>
+  <% if issue.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
+
+      <ul>
+        <% issue.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if issue.errors.any? %>
+    <!-- posar tema errors -->
+  <% end %>
+
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <td scope="col"></td>
+        <td scope="col"></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><%= form.label :title %></th>
+        <td><%= form.text_field :title %></td>
+      </tr>
+      <tr>
+        <th scope="row"><%= form.label :description %></th>
+        <td><%= form.text_area :description %></td>
+      </tr>
+      <tr>
+        <th scope="row"><%= form.label :kind %></th>
+        <td><%= form.select(:issueType, options_for_select([['bug', 'bug'], ['enhancement', 'enhancement'], 
+                                                    ['proposal', 'proposal'], ['task', 'task']])) %></td>
+      </tr>
+      <tr>
+        <th scope="row"><%= form.label :priority %></th>
+        <td><%= form.select(:priority, options_for_select([['trivial', 'trivial'], ['minor', 'minor'], ['major', 'major'], 
+                                                        ['critical', 'critical'], ['blocker', 'blocker']])) %></td>
+      </tr>
+      <tr>
+        <th scope="row"><%= form.label :attachment %></th>
+        <td><%= form.file_field :file%></td>
+      </tr>
+    </tbody>
+  </table>
+  <br><br>
+  <div class="actions">
+    <%= form.submit %>
+    <%= link_to 'Cancel', issues_path %>
+  </div>
+<% end %>

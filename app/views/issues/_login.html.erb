@@ -1,0 +1,15 @@
+<div>
+  <a href=<%= new_issue_path%>>
+    <% if @uid != 0%>
+      <Button class="new_issue">+</Button>
+    <% end %>
+  </a>
+  
+  <Button class="user">
+    <% if user_signed_in? %>
+          <b><%= link_to('Out', destroy_user_session_path, method: :delete) %> </b>
+    <% else %>
+          <b><%= link_to('In', new_user_session_path) %> </b>
+    <% end %>
+  </Button>
+</div>

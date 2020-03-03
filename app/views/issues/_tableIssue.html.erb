@@ -1,0 +1,33 @@
+<table class="table  table-borderless">
+  <tbody>
+    <tr>
+      <th>Assignee</th>
+      <% @users = User.all %> 
+      <% assignee = @users.select{ |usr| usr.id = @issue.idUserAssignee} %>
+      <td ><%= link_to assignee[0].username, assignee[0] %></td>
+    </tr>
+    <tr>
+      <th>Type</th>
+      <td><%= @issue.issueType%></td>
+    </tr>
+    <tr>
+      <th>Priority</th>
+      <td><%= @issue.priority%></td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <td><%= @issue.status %></td>
+    </tr>
+    <tr>
+      <th>Votes</th>
+      <td><%= @issue.votes%></td>
+    </tr>
+    <tr>
+      <th>Watchers</th>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+
+
+    

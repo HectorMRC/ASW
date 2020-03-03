@@ -1,0 +1,26 @@
+<body class="default">
+    <table class="body">
+        <tr class="main">
+            <td class="login">
+                <div>
+                    <%= render 'login', issue: @issue%>
+                </div>
+            </td>
+            
+            <td class="separator"/>
+            
+            <td class="content">
+                <div>
+                    <%= render 'header', issue: @issue %>
+                </div>
+                <div>
+                    <%= render 'table', issue: @issue %>
+                </div>
+                <div>
+                    <%= render 'navbar', issue: @issue %>
+                </div>
+            </td>
+        <tr>
+    <table>
+    <br>
+</body>

@@ -1,0 +1,24 @@
+<div class="navbar">
+  <% if @page > 1%>
+    <%= link_to "Prev", :page => @page-1, :filter => @filter, :value => @value, :sort => @sortby, :order => @order%>
+  <% else %>
+    <text class="noaction">Prev</text>
+  <% end %>
+  
+  <% i = 1
+    while i < @npages+1
+      if i == @page %>
+        <text class="currentpage"><%= i%></text>
+      <% else %>
+        <%= link_to i,  :page => i, :filter => @filter, :value => @value, :sort => @sortby, :order => @order%>
+      <% end %>
+  <% i += 1
+    end %>
+    
+  <% if @page < @npages%>
+    <%= link_to "Next", :page => @page+1, :filter => @filter, :value => @value, :sort => @sortby, :order => @order%>
+  <% else %>
+    <text class="noaction">Next</text>
+  <% end %>
+  
+</div>

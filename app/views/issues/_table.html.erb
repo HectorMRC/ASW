@@ -1,0 +1,81 @@
+<div class="table">
+  <label class="count">
+    Issues (<%= @first_index%>-<%= @last_index%> of <%= @sorted.size%>)
+  </label>
+  
+  <table class="print">
+    <thead>
+      <tr>
+        <% swap = @order == "ASC"? "DESC" : "ASC" %>
+        <th><%=link_to "Title", :value => @value, :page => @page, :filter => @filter, :sort => "title", :order => @sortby == "title"? swap : @order %></th>
+        <th><%=link_to "T", :value => @value, :page => @page, :filter => @filter, :sort => "type", :order => @sortby == "type"? swap : @order %></th>
+        <th><%=link_to "P", :value => @value, :page => @page, :filter => @filter, :sort => "prior", :order => @sortby == "prior"? swap : @order %></th>
+        <th><%=link_to "Status", :value => @value, :page => @page, :filter => @filter, :sort => "stat", :order => @sortby == "stat"? swap : @order %></th>
+        <th><%=link_to "Votes", :value => @value, :page => @page, :filter => @filter, :sort => "votes", :order => @sortby == "votes"? swap : @order %></th>
+        <th><%=link_to "Assignee", :value => @value, :page => @page, :filter => @filter, :sort => "assig", :order => @sortby == "assig"? swap : @order %></th>
+        <th><%=link_to "Created", :value => @value, :page => @page, :filter => @filter, :sort => "creation", :order => @sortby == "creation"? swap : @order %></th>
+        <th><%=link_to "Updated", :value => @value, :page => @page, :filter => @filter, :sort => "update", :order => @sortby == "update"? swap : @order %></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% i = @first_index
+      while i < @last_index+1 && @sorted.size > 0
+        issue = @sorted[i-1]%>
+        <tr>
+          <td><%= link_to issue.id.to_s + ": " + issue.title, issue_path(issue.id)%></td>
+          
+          <% case issue.issueType
+              when "bug"
+               type_icon = image_tag("bug.svg", border: 0, :class => 'icons')
+              when "improvement"
+                type_icon = image_tag("improvement.svg", border: 0, :class => 'icons')
+              when "suggestion"
+                type_icon = image_tag("suggestion.svg", border: 0, :class => 'icons')
+              else
+                type_icon = image_tag("task.svg", border: 0, :class => 'icons')
+              end
+          %>
+          <td><%= link_to type_icon, :filter => "type", :value => issue.issueType, :sort => @sortby, :order => @order %></td>
+          
+          <% case issue.priority
+              when "major"
+                prior_icon = image_tag("major.svg", border: 0, :class => 'icons')
+              when "critical"
+                prior_icon = image_tag("critical.svg", border: 0, :class => 'icons')
+              when "blocker"
+                prior_icon = image_tag("blocker.svg", border: 0, :class => 'icons')
+              when "minor"
+                prior_icon = image_tag("minor.svg", border: 0, :class => 'icons')
+              else
+                prior_icon = image_tag("trivial.svg", border: 0, :class => 'icons')
+              end
+          %>
+          <td><%= link_to prior_icon, :filter => "prior", :value => issue.priority, :sort => @sortby, :order => @order %></td>
+          
+          <td>
+            <b class="status"><%= link_to issue.status, :filter => "stat", :value => issue.status.upcase, :sort => @sortby, :order => @order %></b>
+          </td>
+          <td>
+            <% if issue.votes > 0 %>
+              <b class="points"><%= issue.votes %></b>
+            <% end %>
+          </td>
+          
+          <td>
+          <% assignee = @users.select{ |usr| usr.id = issue.idUserAssignee}
+          if assignee.size > 0%>
+            <%= link_to assignee[0].username, :filter => "assig", :value => issue.idUserAssignee, :sort => @sortby, :order => @order %>
+          <% end  %>
+          </td>
+          
+          <td><%= issue.creationDate %></td>
+          <td><%= issue.updated %></td>
+          <!--td><!%= link_to 'Edit', edit_issue_path(issue) %></td>
+          <!td><!%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td-->
+        </tr>
+      <% i += 1
+      end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,57 @@
+
+<div class="container margin-top">
+  <div class="row">
+    <div class="col-8">
+      <h1><%= @issue.title %></h1>
+    </div>
+  </div>    
+  <div class="row">
+    <p>
+      Issue #
+      <%= @issue.id %>
+      [<%= @issue.status%>]
+    </p>
+        
+    <p>
+      <%= current_user.username %> created an issue 
+      <%= @issue.creationDate %>
+    </p>
+    
+    <br>
+    <h3> Description </h4>
+    <p>
+      <%= @issue.description %>
+    </p>
+    
+    <p>
+      <b>
+       <% if (@issue.file.present?) then %>
+         <%= link_to 'Download', @issue.file, download: '' %>
+       <% end %>
+      </b>
+    </p>
+    
+    <Button class="usroption">
+            <%= link_to "Create Issue", "/issues/new" %>
+    </Button>
+    <br><br>
+    <hr>
+    <h3>Comments (<%= @comments.size %>)</h3>
+    
+    <% @comments.each do |comment| %>
+       <% @user_comment = User.find(comment.user_id) %>
+         <%= @user_comment.username %> 
+        : <%= comment.text %><br>
+      
+    <% end %>
+    <%= render 'formComment', issue: @issue %>
+    <hr>
+    <%= render 'tableIssue', issue: @issue %>
+  </div>
+  
+  <br>
+  <Button class="usroption">
+            <%= link_to "Back to issues", issues_path %>
+  </Button>
+</div>
+<br>
